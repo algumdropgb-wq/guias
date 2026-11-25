@@ -1,0 +1,21 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gerador de cronograma de estudos para concurso (grátis)</title>
+<meta name="description" content="Informe suas matérias e as horas livres por dia: o cronograma semanal sai pronto, com revisões. Grátis e sem cadastro."><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de cronograma de estudos para concurso (grátis)","description":"Informe suas matérias e as horas livres por dia: o cronograma semanal sai pronto, com revisões. Grátis e sem cadastro.","applicationCategory":"UtilitiesApplication","operatingSystem":"Navegador","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}}</script>
+<style>body{margin:0;font:16px/1.6 system-ui,sans-serif;color:#1d2330;background:#f7f8fb}main{max-width:760px;margin:0 auto;padding:24px 16px 60px}label{display:block;margin:14px 0 4px;font-weight:600}
+textarea,input,select{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccd;border-radius:8px;font:inherit}label.ck{font-weight:400}label.ck input{width:auto}
+button{margin-top:14px;background:#2f7bff;color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:700;font-size:1em;cursor:pointer}table{width:100%;border-collapse:collapse;margin-top:16px;background:#fff;font-size:.92em}td,th{border:1px solid #e3e5ec;padding:6px;text-align:left}
+#r{margin-top:10px}.cta{background:#fff;border:2px solid #2f7bff;border-radius:14px;padding:18px;margin:30px 0}.b{display:block;background:#2f7bff;color:#fff;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:700;margin-top:10px}nav a{color:#556}</style></head>
+<body><main><nav><a href="./">← Guias e ferramentas</a></nav><h1>Gerador de cronograma de estudos para concurso (grátis)</h1><p>Informe suas matérias e as horas livres por dia: o cronograma semanal sai pronto, com revisões. Grátis e sem cadastro.</p><label>Matérias (uma por linha; ponha * nas mais importantes)</label><textarea id="m" rows="7">Português*
+Direito Constitucional*
+Direito Administrativo
+Raciocínio Lógico
+Informática</textarea>
+<label>Horas livres por dia (seg a sex)</label><input id="h" type="number" min="1" max="12" value="3"><label>Horas no sábado</label><input id="s" type="number" min="0" max="12" value="4">
+<button onclick="gera()">Gerar cronograma</button><div id="r"></div>
+<div class="cta"><b>📚 Quer que uma IA faça isso por você, do seu jeito?</b><br>Mentor de Concurso IA: Plano de estudo diário montado para o SEU edital, revisão espaçada e questões comentadas no estilo da banca.<a class="b" href="#" data-loja="/e/concurso?src=blog-gerador-de-cronograma-de-estudos-para-concurso">Testar grátis agora</a></div>
+</main><script>function gera(){const ms=document.getElementById('m').value.split('\n').map(x=>x.trim()).filter(Boolean);if(!ms.length)return;
+const pes=ms.map(x=>x.endsWith('*')?2:1),nm=ms.map(x=>x.replace(/\*$/,'').trim());const h=+document.getElementById('h').value||1,sab=+document.getElementById('s').value||0;
+const dias=['Seg','Ter','Qua','Qui','Sex','Sáb'];const fila=[];nm.forEach((n,i)=>{for(let k=0;k<pes[i];k++)fila.push(n)});let j=0;
+let t='<table><tr><th>Dia</th><th>Bloco 1</th><th>Bloco 2</th><th>Revisão</th></tr>';dias.forEach((d,i)=>{const hd=i<5?h:sab;if(!hd){t+='<tr><td>'+d+'</td><td colspan=3>descanso</td></tr>';return}
+const a=fila[j++%fila.length],b=fila[j++%fila.length];const rev=Math.max(15,Math.round(hd*60*0.2));const bl=Math.round((hd*60-rev)/2);
+t+='<tr><td>'+d+'</td><td>'+a+' ('+bl+' min)</td><td>'+b+' ('+bl+' min)</td><td>'+rev+' min do que viu ontem</td></tr>'});
+t+='</table><p>Domingo: revise o que estudou na semana e faça questões da banca. Repita a revisão do mesmo assunto depois de 1 dia, 7 dias e 30 dias.</p>';document.getElementById('r').innerHTML=t}</script><script>fetch('endereco.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{if(!j.url)return;document.querySelectorAll('a[data-loja]').forEach(a=>{a.href=j.url+a.dataset.loja})}).catch(()=>{})</script></body></html>
